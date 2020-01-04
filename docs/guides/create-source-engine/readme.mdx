@@ -1,0 +1,88 @@
+# Create Source Engine for Synor
+
+- It is highly recommended that you use [TypeScript](https://www.typescriptlang.org).
+
+- Add [`@synor/core`](https://www.npmjs.com/package/@synor/core) package as both `devDependencies` and `peerDependencies` in `package.json`.
+
+- If you use any package to interact with the source storage, add them as `dependencies` in `package.json`.
+
+- Implement a function with the signature of type `SourceEngineFactory`.
+
+- The return value should be of type `SourceEngine`.
+
+- The `uri` string should contain everything you need to configure the engine. So you will need to parse it. You can use the [`connection-string`](https://www.npmjs.com/package/connection-string) package for doing that.
+
+```ts
+import { sortVersions, SynorError } from '@synor/core'
+
+type MigrationInfo = import('@synor/core').MigrationInfo
+type SourceEngine = import('@synor/core').SourceEngine
+type SourceEngineFactory = import('@synor/core').SourceEngineFactory
+
+type Type = MigrationInfo['type']
+type Version = MigrationInfo['version']
+
+export const ExampleSourceEngine: SourceEngineFactory = (
+  uri,
+  { migrationInfoParser }
+): SourceEngine => {
+  const { engineConfig, sourceConfig } = getConfig(uri)
+
+  if (typeof migrationInfoParser !== 'function') {
+    throw new SynorError(`Missing: migrationInfoParser`)
+  }
+
+  const open: SourceEngine['open'] = async () => {
+    // Do stuffs
+  }
+
+  const close: SourceEngine['close'] = async () => {
+    // Do stuffs
+  }
+
+  const first: SourceEngine['first'] = async () => {
+    // Do stuffs
+  }
+
+  const prev: SourceEngine['prev'] = async version => {
+    // Do stuffs
+  }
+
+  const next: SourceEngine['next'] = async version => {
+    // Do stuffs
+  }
+
+  const last: SourceEngine['last'] = async () => {
+    // Do stuffs
+  }
+
+  const get: SourceEngine['get'] = async (version, type) => {
+    // Do stuffs
+  }
+
+  const read: SourceEngine['read'] = async ({ filename }) => {
+    // Do stuffs
+  }
+
+  return {
+    open,
+    close,
+    first,
+    prev,
+    next,
+    last,
+    get,
+    read
+  }
+}
+
+export default ExampleSourceEngine
+```
+
+- Your module should contain both named and default exports. The named export should have the prefix `SourceEngine`.
+
+- You should use the `SynorError` class for throwing errors.
+
+- For testing, it is recommended to use [Jest](https://jestjs.io/).
+
+- For recommended repository setup, check the GitHub repositories with [`synor-source-engine`](https://github.com/search?q=topic%3Asynor-source-engine&type=Repositories) topic.
