@@ -6,7 +6,7 @@ export default {
     ...theme.layout,
     root: {
       ...theme.layout.root,
-      maxWidth: 1200
+      maxWidth: 1080
     }
   }
 }
