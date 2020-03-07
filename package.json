@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "description": "Documentation Site for Synor",
   "keywords": [
-    "gatsby",
+    "docusaurus",
     "synor"
   ],
   "bugs": "https://github.com/Synor/site/issues",
@@ -12,29 +12,16 @@
   "author": "Munif Tanjim (https://muniftanjim.dev)",
   "repository": "https://github.com/Synor/site",
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "start": "npm run develop",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "start": "docusaurus start",
+    "build": "docusaurus build",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy"
   },
   "dependencies": {
-    "gatsby": "^2.18.17",
-    "gatsby-image": "^2.2.37",
-    "gatsby-plugin-manifest": "^2.2.34",
-    "gatsby-plugin-offline": "^3.0.30",
-    "gatsby-plugin-react-helmet": "^3.1.18",
-    "gatsby-plugin-sharp": "^2.3.10",
-    "gatsby-source-filesystem": "^2.1.43",
-    "gatsby-theme-dox": "^0.3.1",
-    "gatsby-transformer-sharp": "^2.3.9",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-helmet": "^6.0.0-beta"
-  },
-  "devDependencies": {
-    "prettier": "^1.19.1"
+    "@docusaurus/core": "^2.0.0-alpha.43",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.43",
+    "classnames": "^2.2.6",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
   }
 }

@@ -1,4 +1,6 @@
-# Create Source Engine for Synor
+---
+title: Create Source Engine
+---
 
 - It is highly recommended that you use [TypeScript](https://www.typescriptlang.org).
 
@@ -13,56 +15,56 @@
 - The `uri` string should contain everything you need to configure the engine. So you will need to parse it. You can use the [`connection-string`](https://www.npmjs.com/package/connection-string) package for doing that.
 
 ```ts
-import { sortVersions, SynorError } from '@synor/core'
+import { sortVersions, SynorError } from "@synor/core";
 
-type MigrationInfo = import('@synor/core').MigrationInfo
-type SourceEngine = import('@synor/core').SourceEngine
-type SourceEngineFactory = import('@synor/core').SourceEngineFactory
+type MigrationInfo = import("@synor/core").MigrationInfo;
+type SourceEngine = import("@synor/core").SourceEngine;
+type SourceEngineFactory = import("@synor/core").SourceEngineFactory;
 
-type Type = MigrationInfo['type']
-type Version = MigrationInfo['version']
+type Type = MigrationInfo["type"];
+type Version = MigrationInfo["version"];
 
 export const ExampleSourceEngine: SourceEngineFactory = (
   uri,
   { migrationInfoParser }
 ): SourceEngine => {
-  const { engineConfig, sourceConfig } = getConfig(uri)
+  const { engineConfig, sourceConfig } = getConfig(uri);
 
-  if (typeof migrationInfoParser !== 'function') {
-    throw new SynorError(`Missing: migrationInfoParser`)
+  if (typeof migrationInfoParser !== "function") {
+    throw new SynorError(`Missing: migrationInfoParser`);
   }
 
-  const open: SourceEngine['open'] = async () => {
+  const open: SourceEngine["open"] = async () => {
     // Do stuffs
-  }
+  };
 
-  const close: SourceEngine['close'] = async () => {
+  const close: SourceEngine["close"] = async () => {
     // Do stuffs
-  }
+  };
 
-  const first: SourceEngine['first'] = async () => {
+  const first: SourceEngine["first"] = async () => {
     // Do stuffs
-  }
+  };
 
-  const prev: SourceEngine['prev'] = async version => {
+  const prev: SourceEngine["prev"] = async version => {
     // Do stuffs
-  }
+  };
 
-  const next: SourceEngine['next'] = async version => {
+  const next: SourceEngine["next"] = async version => {
     // Do stuffs
-  }
+  };
 
-  const last: SourceEngine['last'] = async () => {
+  const last: SourceEngine["last"] = async () => {
     // Do stuffs
-  }
+  };
 
-  const get: SourceEngine['get'] = async (version, type) => {
+  const get: SourceEngine["get"] = async (version, type) => {
     // Do stuffs
-  }
+  };
 
-  const read: SourceEngine['read'] = async ({ filename }) => {
+  const read: SourceEngine["read"] = async ({ filename }) => {
     // Do stuffs
-  }
+  };
 
   return {
     open,
@@ -73,10 +75,10 @@ export const ExampleSourceEngine: SourceEngineFactory = (
     last,
     get,
     read
-  }
-}
+  };
+};
 
-export default ExampleSourceEngine
+export default ExampleSourceEngine;
 ```
 
 - Your module should contain both named and default exports. The named export should have the prefix `SourceEngine`.

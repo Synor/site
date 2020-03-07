@@ -1,4 +1,6 @@
-# Create Database Engine for Synor
+---
+title: Create Database Engine
+---
 
 - It is highly recommended that you use [TypeScript](https://www.typescriptlang.org).
 
@@ -13,86 +15,86 @@
 - The `uri` string should contain everything you need to configure the engine. So you will need to parse it. You can use the [`connection-string`](https://www.npmjs.com/package/connection-string) package for doing that.
 
 ```ts
-import { SynorError } from '@synor/core'
-import { performance } from 'perf_hooks'
+import { SynorError } from "@synor/core";
+import { performance } from "perf_hooks";
 
-type DatabaseEngine = import('@synor/core').DatabaseEngine
-type DatabaseEngineFactory = import('@synor/core').DatabaseEngineFactory
-type MigrationSource = import('@synor/core').MigrationSource
+type DatabaseEngine = import("@synor/core").DatabaseEngine;
+type DatabaseEngineFactory = import("@synor/core").DatabaseEngineFactory;
+type MigrationSource = import("@synor/core").MigrationSource;
 
 export const ExampleDatabaseEngine: DatabaseEngineFactory = (
   uri,
   { baseVersion, getAdvisoryLockId, getUserInfo }
 ): DatabaseEngine => {
-  const { databaseConfig, engineConfig } = getConfig(uri)
+  const { databaseConfig, engineConfig } = getConfig(uri);
 
-  if (typeof getAdvisoryLockId !== 'function') {
-    throw new SynorError(`Missing: getAdvisoryLockId`)
+  if (typeof getAdvisoryLockId !== "function") {
+    throw new SynorError(`Missing: getAdvisoryLockId`);
   }
 
-  if (typeof getUserInfo !== 'function') {
-    throw new SynorError(`Missing: getUserInfo`)
+  if (typeof getUserInfo !== "function") {
+    throw new SynorError(`Missing: getUserInfo`);
   }
 
   const advisoryLockId = getAdvisoryLockId(
     databaseConfig.database,
     engineConfig.migrationRecordTable
-  ).join(':')
+  ).join(":");
 
-  let appliedBy = ''
+  let appliedBy = "";
 
-  const open: DatabaseEngine['open'] = async () => {
-    appliedBy = await getUserInfo()
+  const open: DatabaseEngine["open"] = async () => {
+    appliedBy = await getUserInfo();
     // Do stuffs
-  }
+  };
 
-  const close: DatabaseEngine['close'] = async () => {
+  const close: DatabaseEngine["close"] = async () => {
     // Do stuffs
-  }
+  };
 
-  const lock: DatabaseEngine['lock'] = async () => {
+  const lock: DatabaseEngine["lock"] = async () => {
     // Do stuffs
-  }
+  };
 
-  const unlock: DatabaseEngine['unlock'] = async () => {
+  const unlock: DatabaseEngine["unlock"] = async () => {
     // Do stuffs
-  }
+  };
 
-  const drop: DatabaseEngine['drop'] = async () => {
+  const drop: DatabaseEngine["drop"] = async () => {
     // Do stuffs
-  }
+  };
 
-  const run: DatabaseEngine['run'] = async ({
+  const run: DatabaseEngine["run"] = async ({
     version,
     type,
     title,
     hash,
     body
   }: MigrationSource) => {
-    let dirty = false
+    let dirty = false;
 
-    const startTime = performance.now()
+    const startTime = performance.now();
 
     try {
       // Do stuffs
     } catch (err) {
-      dirty = true
+      dirty = true;
 
-      throw err
+      throw err;
     } finally {
-      const endTime = performance.now()
+      const endTime = performance.now();
 
       // Add migration record
     }
-  }
+  };
 
-  const repair: DatabaseEngine['repair'] = async records => {
+  const repair: DatabaseEngine["repair"] = async records => {
     // Do stuffs
-  }
+  };
 
-  const records: DatabaseEngine['records'] = async startId => {
+  const records: DatabaseEngine["records"] = async startId => {
     // Do stuffs
-  }
+  };
 
   return {
     open,
@@ -103,10 +105,10 @@ export const ExampleDatabaseEngine: DatabaseEngineFactory = (
     run,
     repair,
     records
-  }
-}
+  };
+};
 
-export default ExampleDatabaseEngine
+export default ExampleDatabaseEngine;
 ```
 
 - Your module should contain both named and default exports. The named export should have the prefix `DatabaseEngine`.
