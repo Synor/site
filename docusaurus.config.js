@@ -1,59 +1,59 @@
 module.exports = {
-  title: "Synor",
-  tagline: "Database Schema Migration Library",
-  url: "https://synor.netlify.com",
-  baseUrl: "/",
-  favicon: "img/favicon.ico",
-  organizationName: "Synor",
-  projectName: "site",
+  title: 'Synor',
+  tagline: 'Database Schema Migration Library',
+  url: 'https://synor.netlify.app',
+  baseUrl: '/',
+  favicon: 'img/favicon.ico',
+  organizationName: 'Synor',
+  projectName: 'site',
   themeConfig: {
     navbar: {
-      title: "Synor",
+      title: 'Synor',
       // logo: {
       //   alt: "Synor Logo",
       //   src: "img/logo.svg"
       // },
       links: [
-        { to: "docs/introduction", label: "Docs", position: "left" },
-        { to: "blog", label: "Blog", position: "left" },
+        { to: 'docs/introduction', label: 'Docs', position: 'left' },
+        { to: 'blog', label: 'Blog', position: 'left' },
         {
-          href: "https://github.com/Synor",
-          label: "GitHub",
-          position: "right"
+          href: 'https://github.com/Synor',
+          label: 'GitHub',
+          position: 'right'
         }
       ]
     },
     footer: {
-      style: "dark",
+      style: 'dark',
       links: [
         {
-          title: "Docs",
+          title: 'Docs',
           items: [
             {
-              label: "Introduction",
-              to: "docs/introduction"
+              label: 'Introduction',
+              to: 'docs/introduction'
             }
           ]
         },
         {
-          title: "Community",
+          title: 'Community',
           items: [
             {
-              label: "Stack Overflow",
-              href: "https://stackoverflow.com/questions/tagged/synor"
+              label: 'Stack Overflow',
+              href: 'https://stackoverflow.com/questions/tagged/synor'
             }
           ]
         },
         {
-          title: "Social",
+          title: 'Social',
           items: [
             {
-              label: "Blog",
-              to: "blog"
+              label: 'Blog',
+              to: 'blog'
             },
             {
-              label: "GitHub",
-              href: "https://github.com/Synor"
+              label: 'GitHub',
+              href: 'https://github.com/Synor'
             }
           ]
         }
@@ -63,16 +63,16 @@ module.exports = {
   },
   presets: [
     [
-      "@docusaurus/preset-classic",
+      '@docusaurus/preset-classic',
       {
         docs: {
-          sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: "https://github.com/Synor/site/edit/master/"
+          sidebarPath: require.resolve('./sidebars.js'),
+          editUrl: 'https://github.com/Synor/site/edit/master/'
         },
         theme: {
-          customCss: require.resolve("./src/css/custom.css")
+          customCss: require.resolve('./src/css/custom.css')
         }
       }
     ]
   ]
-};
+}
