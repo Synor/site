@@ -29,7 +29,6 @@
   width: 100%;
 }
 
-.featureImage {
-  height: 200px;
-  width: 200px;
+.getStarted {
+  color: var(--ifm-color-primary) !important;
 }

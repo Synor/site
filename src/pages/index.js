@@ -1,15 +1,14 @@
-import React from "react";
-import classnames from "classnames";
-import Layout from "@theme/Layout";
-import Link from "@docusaurus/Link";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import useBaseUrl from "@docusaurus/useBaseUrl";
-import styles from "./styles.module.css";
+import React from 'react'
+import classnames from 'classnames'
+import Layout from '@theme/Layout'
+import Link from '@docusaurus/Link'
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import useBaseUrl from '@docusaurus/useBaseUrl'
+import styles from './styles.module.css'
 
 const features = [
   {
     title: <>Simple and Predictable</>,
-    imageUrl: "img/undraw_documents.svg",
     description: (
       <>
         Keep track of your database schema changes and apply them predictably.
@@ -19,7 +18,6 @@ const features = [
   },
   {
     title: <>Database Agnostic</>,
-    imageUrl: "img/undraw_server_status.svg",
     description: (
       <>
         Doesn't matter which database you choose, SQL or NoSQL, Synor got you
@@ -27,42 +25,37 @@ const features = [
       </>
     )
   }
-];
+]
 
 function Feature({ imageUrl, title, description }) {
-  const imgUrl = useBaseUrl(imageUrl);
+  const imgUrl = useBaseUrl(imageUrl)
   return (
-    <div className={classnames("col col--4", styles.feature)}>
-      {imgUrl && (
-        <div className="text--center">
-          <img className={styles.featureImage} src={imgUrl} alt={title} />
-        </div>
-      )}
+    <div className={classnames('col col--4', styles.feature)}>
       <h3>{title}</h3>
       <p>{description}</p>
     </div>
-  );
+  )
 }
 
 function Home() {
-  const context = useDocusaurusContext();
-  const { siteConfig = {} } = context;
+  const context = useDocusaurusContext()
+  const { siteConfig = {} } = context
   return (
     <Layout
       title={`Database Schema Migration with Synor`}
       description="Database Schema Migration Library"
     >
-      <header className={classnames("hero hero--primary", styles.heroBanner)}>
+      <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={styles.buttons}>
             <Link
               className={classnames(
-                "button button--outline button--secondary button--lg",
+                'button button--secondary button--lg',
                 styles.getStarted
               )}
-              to={useBaseUrl("docs/introduction")}
+              to={useBaseUrl('docs/introduction')}
             >
               Get Started
             </Link>
@@ -73,7 +66,7 @@ function Home() {
         {features && features.length && (
           <section className={styles.features}>
             <div className="container">
-              <div className="row" style={{ justifyContent: "center" }}>
+              <div className="row" style={{ justifyContent: 'center' }}>
                 {features.map((props, idx) => (
                   <Feature key={idx} {...props} />
                 ))}
@@ -83,7 +76,7 @@ function Home() {
         )}
       </main>
     </Layout>
-  );
+  )
 }
 
-export default Home;
+export default Home
