@@ -1,0 +1,74 @@
+---
+title: Use as Library
+---
+
+Synor can be used as a library to handle you database schema migration. So, you can use Synor to write your own tools.
+
+The first thing you'll need is the `@synor/core` package. Let's install it with the following command:
+
+```sh
+# using yarn:
+yarn add @synor/core
+
+# using npm:
+npm install --save @synor/core
+```
+
+Next, you'll need a database engine and a source engine for Synor. You can write those yourself or use the [existing packages](https://www.npmjs.com/search?q=synor). For this guide, let's assume we'll use PostgreSQL as the database and read the migration definition from local filesystem. So, let's install those packages too:
+
+```sh
+# using yarn:
+yarn add @synor/database-postgresql @synor/source-file
+
+# using npm:
+npm install --save @synor/database-postgresql @synor/source-file
+```
+
+Now that we've installed all the necessary packages, we're ready to use them together:
+
+```ts
+import { Synor } from '@synor/core'
+
+const synor = Synor({
+  DatabaseEngine: '@synor/database-postgresql',
+  databaseUri: 'postgresql://username@password:127.0.0.1:5432/database',
+  SourceEngine: '@synor/source-file',
+  sourceUri: 'file://./schema-migrations'
+})
+```
+
+And you're ready to do stuffs with Synor! Just remember that Synor just emits events when you call the various functions it exposes. So, you'll need to add listener for the events you're interested in.
+
+```ts
+async function showCurrentRecord() {
+  this.synor.migrator
+    .on('open:start', () => {
+      console.log('Opening connections to underlying database and source...')
+    })
+    .on('open:end', () => {
+      console.log('Connections established!')
+    })
+    .on('close:start', () => {
+      console.log('Closing connections...')
+    })
+    .on('close:end', () => {
+      console.log('Connections closed!')
+    })
+    .on('current', record => {
+      console.log('Database is currently at: ', JSON.stringify(record, null, 2))
+    })
+
+  await synor.migrator.open()
+
+  await synor.migrator.current()
+
+  await synor.migrator.close()
+}
+
+showCurrentRecord().catch(err => {
+  console.error(err)
+  process.exit(1)
+})
+```
+
+That's pretty much it!
