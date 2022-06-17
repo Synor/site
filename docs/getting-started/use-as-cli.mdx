@@ -1,3 +1,75 @@
 ---
 title: Use as CLI
 ---
+
+Synor has a CLI tool that you can use in your projects.
+
+The first thing you'll need are the `@synor/cli` and `@synor/core` packages. Let's install them with the following command:
+
+```sh
+# using yarn:
+yarn add @synor/cli @synor/core
+
+# using npm:
+npm install --save @synor/cli @synor/core
+```
+
+Next, you'll need a database engine and a source engine for Synor. You can write those yourself or use the [existing packages](https://www.npmjs.com/search?q=synor). For this guide, let's assume we'll use PostgreSQL as the database and read the migration definition from local filesystem. So, let's install those packages too:
+
+```sh
+# using yarn:
+yarn add @synor/database-postgresql @synor/source-file
+
+# using npm:
+npm install --save @synor/database-postgresql @synor/source-file
+```
+
+Now that we've installed all the necessary packages, we're ready to configure the CLI. Let's create the config file `.synorrc.js` with the following content:
+
+```js
+const path = require('path')
+
+module.exports = {
+  databaseEngine: `@synor/database-postgresql`,
+  databaseUri: `postgresql://postgres:postgres@localhost:5432/synor`,
+
+  sourceEngine: `@synor/source-file`,
+  sourceUri: `file://${path.resolve('migrations')}`,
+
+  baseVersion: '0000000000000',
+  recordStartId: 1,
+  migrationInfoNotation: {
+    do: 'do',
+    undo: 'undo',
+    separator: '.',
+    extension: 'sql',
+  },
+}
+```
+
+You can now put your schema migration sql scripts in the `./migrations` folder and start using the CLI commands.
+
+According to the `migrationInfoNotation` set above, the filenames for the sql scripts would look like this:
+
+**`1640995200000.do.add-column-active-in-table-user.sql`**:
+
+```sql
+alter table "user"
+    add column "active" bool not null default TRUE;
+```
+
+**`1640995200000.undo.add-column-active-in-table-user.sql`**:
+
+```sql
+alter table "user"
+    drop column "active";
+```
+
+Now you're ready to go. Run the following commands to get started:
+
+```sh
+synor help
+synor info
+```
+
+That's it!
